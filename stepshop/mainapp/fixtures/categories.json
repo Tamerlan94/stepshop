@@ -1,0 +1,26 @@
+[
+  {
+    "model": "mainapp.productcategory",
+    "pk": 1,
+    "fields": {
+      "name": "обувь",
+      "description": "ботинки"
+    }
+  },
+  {
+    "model": "mainapp.productcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Штаны",
+      "description": "различные штаны"
+    }
+  },
+  {
+    "model": "mainapp.productcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Телефоны",
+      "description": "смартфоны и прочее"
+    }
+  }
+]
