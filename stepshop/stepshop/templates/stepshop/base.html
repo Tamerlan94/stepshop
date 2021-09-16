@@ -33,13 +33,20 @@ https://www.tooplate.com/view/2114-pixie
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+           {% if user.is_authenticated %}
             <span>
-              {% if user.is_authenticated %}
-                {{ user.username }}
-              {% else %}
-                Не авторизован
-              {% endif %}
+              <a href="{#% url 'auth:edit' %#}" style="color:white;">
+                {{ user.first_name|default:user.username }}
+              </a>
             </span>
+            <span>
+              <a href="{% url 'auth:logout' %}" style="color:white;">Выйти</a>
+            </span>
+            {% else %}
+            <span>
+              <a href="{% url 'auth:login' %}" style="color:white;">Войти</a>
+            </span>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -94,38 +101,7 @@ https://www.tooplate.com/view/2114-pixie
 
     
     <!-- Footer Starts Here -->
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="logo">
-              <img src="{% static 'stepshop/assets/images/header-logo.png' %}" alt="">
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="footer-menu">
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">How It Works ?</a></li>
-                <li><a href="#">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="social-icons">
-              <ul>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-rss"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <!-- Footer Ends Here -->
 
 
