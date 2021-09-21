@@ -19,7 +19,7 @@
         {% for product in products %}
 
         <div id="{{ product.id }}" class="item new col-md-4">
-            <a href="#">
+            <a href="{% url 'products:product' product.pk %}">
                 <div class="featured-item">
                     <img src="{% if product.image %}
                                 {{ product.image.url }}

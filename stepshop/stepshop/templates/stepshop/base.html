@@ -50,6 +50,15 @@ https://www.tooplate.com/view/2114-pixie
               <a href="{% url 'auth:login' %}" style="color:white;">Войти</a>
             </span>
             {% endif %}
+
+            <a href="{% url 'basket:view' %}" class="basket" style="color:white; margin-left:50px;"> Корзина
+              {% if basket %}
+              (
+                <span>{{ basket|length }}</span>
+              )
+              {% endif %}
+            </a>
+
           </div>
         </div>
       </div>

@@ -11,3 +11,16 @@
 #filters .active a {
     color: #3a8bcd;
 }
+
+/*
+.basket {
+    display: flex;
+    justify-content: flex-end;
+    width: 28px;
+    height: 26px;
+}
+*/
+
+.single-product{
+    margin-top: 50px;
+}
