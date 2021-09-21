@@ -28,6 +28,22 @@ class Basket(models.Model):
         auto_now_add=True,
     )
 
+    @property
+    def product_cost(self):
+        return self.product.price * self.quantity
+
+    @property
+    def total_quantity(self):
+        __items = Basket.objects.filter(user=self.user)
+        __total_quantity = sum(list(map(lambda x: x.quantity, __items)))
+        return __total_quantity
+
+    @property
+    def total_cost(self):
+        __items = Basket.objects.filter(user=self.user)
+        __total_cost = sum(list(map(lambda x: x.product_cost, __items)))
+        return __total_cost
+
     def __str__(self):
         return self.name or f'Id корзины - {self.pk}'
 

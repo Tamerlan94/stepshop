@@ -54,10 +54,12 @@ https://www.tooplate.com/view/2114-pixie
             <a href="{% url 'basket:view' %}" class="basket" style="color:white; margin-left:50px;"> Корзина
               {% if basket %}
               (
-                <span>{{ basket|length }}</span>
+                <span>{{ basket.0.total_quantity }}</span>
               )
               {% endif %}
             </a>
+
+              <span>${{ basket.0.total_cost|floatformat:0 }}</span>
 
           </div>
         </div>
