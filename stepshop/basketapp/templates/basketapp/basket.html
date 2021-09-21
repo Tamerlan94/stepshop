@@ -4,52 +4,16 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container">
-    <div class="row">
-        <div class="section-heading">
-            <div class="line-dec"></div>
-            <h1>Товары</h1>
-        </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Продукт</th>
-                <th scope="col">Количество</th>
-                <th scope="col">Стоимость</th>
-                <th scope="col">Удалить</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in basket %}
-            <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ item.product }}</td>
-                <td>
-                    <input type="number"
-                           name="{{ item.pk }}"
-                           min="0"
-                           value="{{ item.quantity }}">
-                </td>
-                <td>${{ item.product.price }}</td>
-                <td>
-                    <a href="{% url 'basket:remove' item.pk %}">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <!--                            <button class="btn btn-round">-->
-                    <!--                                <a href="{% url 'basket:remove' item.pk %}">Удалить</a>-->
-                    <!--                            </button>-->
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="row basket_list">
 
-    </div>
+        {% include 'basketapp/includes/inc_basket_list.html' %}
 
-    <div class="basket_summary">
-        <div>Общее количество товаров: <strong>{{ basket.0.total_quantity }} шт.</strong></div>
-        <div>Общая стоимость: <strong>${{ basket.0.total_cost }}</strong></div>
     </div>
 </div>
 {% endif %}
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'basketapp/js/script.js' %}"></script>
 {% endblock %}
