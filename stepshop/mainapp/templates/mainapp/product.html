@@ -1,92 +1,86 @@
 {% extends 'stepshop/base.html' %}
 {% load static %}
+{% load default_image_tags %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'mainapp/style.css' %}">
 {% endblock %}
 
 {% block content %}
-    <!-- Page Content -->
-    <!-- Single Starts Here -->
-    <div class="single-product">
-      <div class="container">
+<!-- Page Content -->
+<!-- Single Starts Here -->
+<div class="single-product">
+    <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <div class="line-dec"></div>
-              <h1>Продукт</h1>
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <div class="line-dec"></div>
+                    <h1>Продукт</h1>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="product-slider">
-              <div id="slider" class="flexslider">
-                <img src="
-                          {% if product.image %}
-                          {{ product.image.url }}
-                          {% endif %}
-                         " alt="{{ product.name }}" />
-              </div>
+            <div class="col-md-6">
+                <div class="product-slider">
+                    <div id="slider" class="flexslider">
+                        <img src="{{ product.image|default_product_image }}" alt="{{ product.name }}">
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="right-content">
-              <h4>{{ product.name }}</h4>
-              <h6>${{ product.price }}</h6>
-              <p>{{ product.description }}</p>
+            <div class="col-md-6">
+                <div class="right-content">
+                    <h4>{{ product.name }}</h4>
+                    <h6>${{ product.price }}</h6>
+                    <p>{{ product.description }}</p>
 
-              <div class="main-button">
-                <a href="{% url 'basket:add' product.pk %}">Заказать</a>
-              </div>
+                    <div class="main-button">
+                        <a href="{% url 'basket:add' product.pk %}">Заказать</a>
+                    </div>
 
-              <div class="down-content">
-                <div class="categories">
-                  <h6>Категория: <span>
+                    <div class="down-content">
+                        <div class="categories">
+                            <h6>Категория: <span>
                     <a href="{% url 'products:category' product.category.pk %}">
                       {{ product.category }}
                     </a>
                   </span></h6>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!-- Single Page Ends Here -->
+</div>
+<!-- Single Page Ends Here -->
 
 
-    <!-- Similar Starts Here -->
-    <div class="featured-items">
-      <div class="container">
+<!-- Similar Starts Here -->
+<div class="featured-items">
+    <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <div class="line-dec"></div>
-              <h1>You May Also Like</h1>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="owl-carousel owl-theme">
-
-              {% for sim_product in similar_products %}
-
-              <a href="{% url 'products:product' sim_product.pk %}">
-                <div class="featured-item">
-                  <img src="{% if sim_product.image %}
-                                {{ sim_product.image.url }}
-                            {% endif %}"
-                         alt="{{ sim_product.name }}">
-                  <h4>{{ sim_product.name }}</h4>
-                  <h6>${{ sim_product.price }}</h6>
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <div class="line-dec"></div>
+                    <h1>You May Also Like</h1>
                 </div>
-              </a>
-
-              {% endfor %}
-
             </div>
-          </div>
+            <div class="col-md-12">
+                <div class="owl-carousel owl-theme">
+
+                    {% for sim_product in similar_products %}
+
+                    <a href="{% url 'products:product' sim_product.pk %}">
+                        <div class="featured-item">
+                            <img src="{{ product.image|default_product_image }}" alt="{{ product.name }}">
+                            <h4>{{ sim_product.name }}</h4>
+                            <h6>${{ sim_product.price }}</h6>
+                        </div>
+                    </a>
+
+                    {% endfor %}
+
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <!-- Similar Ends Here -->
+</div>
+<!-- Similar Ends Here -->
 {% endblock %}

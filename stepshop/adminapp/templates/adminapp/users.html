@@ -7,7 +7,7 @@
         <h1 class="mt-4">Пользователи</h1>
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
+                <i class="fa fa-table mr-1"></i>
                 Пользователи
             </div>
             <div class="card-body">
@@ -40,7 +40,7 @@
                         <tbody>
                         {% for user in objects %}
                             <tr {% if not user.is_active %} style="opacity: 0.5;" {% endif %}>
-                                <td><a href="{#% url 'admin_staff:user_update' user.id %#}"
+                                <td><a href="{% url 'admin_staff:user_update' user.pk %}"
                                        style="color: dodgerblue">{{ user.username }}</a></td>
                                 <td>{{ user.first_name }}</td>
                                 <td>{{ user.last_name }}</td>
@@ -63,7 +63,7 @@
                                 <td>
                                     <a {% if not user.is_active %}
                                        class="invisible" {% endif %}
-                                       href="{#% url 'admin_staff:user_delete' pk=user.id %#}">
+                                       href="{% url 'admin_staff:user_delete' pk=user.id %}">
                                         <i class="fa fa-times-circle"></i>
                                     </a>
                                 </td>
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="{#% url 'adminapp:user_create' %#}">
+                <a href="{% url 'adminapp:user_create' %}">
                     <button class="btn btn-success">Создать пользователя</button>
                 </a>
             </div>
