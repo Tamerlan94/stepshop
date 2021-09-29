@@ -1,4 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from basketapp.models import Basket
 from .models import Product, ProductCategory
@@ -20,6 +22,8 @@ def products(request, pk=None):
     if pk is not None:
         products_all = Product.objects.filter(category__id=pk)
         category = get_object_or_404(ProductCategory, id=pk)
+        if not category.is_active:
+            return HttpResponseRedirect(reverse('products:index'))
 
     basket = get_basket(request.user)
 
@@ -41,6 +45,11 @@ def product(request, pk):
     links_menu = ProductCategory.objects.all()
     product_item = get_object_or_404(Product, id=pk)
     all_products = Product.objects.filter(category=product_item.category).exclude(id=product_item.id)
+
+    category = product_item.category
+
+    if not category.is_active:
+        return HttpResponseRedirect(reverse('products:index'))
 
     basket = get_basket(request.user)
 
