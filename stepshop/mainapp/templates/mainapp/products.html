@@ -35,20 +35,47 @@
     </div>
 </div>
 
+{% if products_p.paginator and products_p.paginator.num_pages > 1 %}
 <div class="page-navigation">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <ul>
-                    <li class="current-page"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    {% if products_p.has_previous %}
+                    <li>
+                        <a href="{% url 'products:page' category.pk products_p.previous_page_number %}">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for page in products_p.paginator.page_range %}
+                        <li {% if products_p.number == page %} class="current-page" {% endif %}>
+                            <a href="{% url 'products:page' category.pk page %}">
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+
+<!--                    <li class="current-page"><a href="#">1</a></li>-->
+<!--                    <li><a href="#">2</a></li>-->
+<!--                    <li><a href="#">3</a></li>-->
+
+
+                    {% if products_p.has_next %}
+                    <li>
+                        <a href="{% url 'products:page' category.pk products_p.next_page_number %}">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </div>
 </div>
+{% endif %}
 <!-- Featred Page Ends Here -->
 
 {% endblock %}

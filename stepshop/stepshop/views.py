@@ -15,7 +15,7 @@ def index(request):
 
     title = 'главная'
     categories = ProductCategory.objects.all()
-    products = Product.objects.filter(category__is_active=True)
+    products = Product.objects.filter(category__is_active=True, is_active=True)  # all()  # [:4]
 
     basket = get_basket(request.user)
 
