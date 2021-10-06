@@ -3,7 +3,7 @@
 {% load default_image_tags %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'mainapp/style.css' %}">
+
 {% endblock %}
 
 {% block content %}
@@ -43,29 +43,41 @@
                 <ul>
                     {% if products_p.has_previous %}
                     <li>
-                        <a href="{% url 'products:page' category.pk products_p.previous_page_number %}">
+                        <a href="
+                                {% if pk %}
+                                    {% url 'products:category_page' category.pk products_p.previous_page_number %}
+                                {% else %}
+                                    {% url 'products:page' products_p.previous_page_number %}
+                                {% endif %}
+                                ">
                             <i class="fa fa-angle-left"></i>
                         </a>
                     </li>
                     {% endif %}
 
                     {% for page in products_p.paginator.page_range %}
-                        <li {% if products_p.number == page %} class="current-page" {% endif %}>
-                            <a href="{% url 'products:page' category.pk page %}">
-                                {{ page }}
-                            </a>
-                        </li>
+                    <li {% if products_p.number == page %} class="current-page" {% endif %}>
+                         <a href="
+                                    {% if pk %}
+                                        {% url 'products:category_page' category.pk page %}
+                                    {% else %}
+                                        {% url 'products:page' page %}
+                                    {% endif %}
+                                    ">
+                            {{ page }}
+                        </a>
+                    </li>
                     {% endfor %}
-
-
-<!--                    <li class="current-page"><a href="#">1</a></li>-->
-<!--                    <li><a href="#">2</a></li>-->
-<!--                    <li><a href="#">3</a></li>-->
-
 
                     {% if products_p.has_next %}
                     <li>
-                        <a href="{% url 'products:page' category.pk products_p.next_page_number %}">
+                        <a href="
+                                {% if pk %}
+                                    {% url 'products:category_page' category.pk products_p.next_page_number %}
+                                {% else %}
+                                    {% url 'products:page' products_p.next_page_number %}
+                                {% endif %}
+                                ">
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
